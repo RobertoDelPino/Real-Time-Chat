@@ -29,7 +29,7 @@ const MessageInput = () => {
     }
 
   return (
-    <section className="flex justify-center items-center border-t border-black">
+    <section className="bg-gray-100 h-18 w-full lg:w-4/6 fixed bottom-0 flex justify-center items-center border-t border-black">
         <textarea 
             className="m-2 border border-black w-9/12 p-1 resize-none"  
             placeholder="Empieza a escribir"

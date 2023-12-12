@@ -83,8 +83,8 @@ const Chat = () => {
                 </span>
 
     return (
-        <section className="h-full max-h-full flex flex-col justify-end">
-            <section className="flex justify-between items-center w-full bg-gray-200">
+        <div className="h-full max-h-full">
+            <section className="z-10 fixed top-0 flex justify-between items-center w-full bg-gray-200">
                 <ChatHeader user={selectedChat.users.find(user => user._id !== auth._id)} getProfilePhoto={getProfilePhoto}/>
                 <article className="px-4 lg:hidden">
                     <button 
@@ -93,7 +93,8 @@ const Chat = () => {
                     >Cerrar Chat</button>
                 </article>
             </section>
-            <section className="flex flex-col-reverse flex-grow overflow-scroll overflow-x-hidden " ref={chatContainerRef}>
+                
+            <section className="relative bottom-20 h-full flex flex-col-reverse flex-grow overflow-scroll overflow-x-hidden " ref={chatContainerRef}>
                 {
 
                     [...chatOnPage.messages].reverse().map((message, index) => {
@@ -117,7 +118,8 @@ const Chat = () => {
                 })}
             </section>
             <MessageInput/>
-        </section>
+        </div>
+        
     )
 }
 

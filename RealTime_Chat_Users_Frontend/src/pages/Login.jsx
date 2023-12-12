@@ -32,7 +32,7 @@ const Login = () => {
       navigate("/chat")
     } catch (error) {
       setAlert({
-        message: error.response.data.message,
+        message: error.response.data.error,
         error: true
       })
     }
