@@ -61,18 +61,19 @@ const login = async (req, res) => {
         return res.status(404).json({message: error.message})
     }
 
-    if(!user.checkPassword(password)){
-        const error = new Error("Password is not correct")
-        return res.status(404).json({message: error.message})
+    if(await user.checkPassword(password)){
+        return res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar,
+            token: generateJWT(user._id)
+        });
     }
-
-    return res.json({
-        _id: user._id,
-        email: user.email,
-        name: user.name,
-        avatar: user.avatar,
-        token: generateJWT(user._id)
-    });
+    else{
+        const error = new Error("Password is not correct");
+        return res.status(400).json({error: error.message});
+    }
 }
 
 const forgotPassword = async (req, res) => {
