@@ -29,14 +29,28 @@ const StartChat = () => {
             }
 
             const findChatResult = await findChatId(connectedUserId, userResult.data._id)
-
             if(findChatResult.data.chatId){
+                var chatFinded = findChat(findChatResult.data.chatId)
+                if(chatFinded){
+                    setSelectedChat(chatFinded)
+                    await getChatMessages(findChatResult.data.chatId)
+                    setEmail("")
+                    return
+                }
+
                 const chatId = findChatResult.data.chatId
-                const users = findChatResult.data.users
-                setChats([...chats, {_id: chatId, users: users, messages: []}])
+                const usersId = findChatResult.data.users
+                const usersChat = usersId.map(userId => ({_id: userId}))
+                setChats([...chats, {_id: chatId, users: usersId, messages: []}])
+                setSelectedChat({_id: chatId, users: usersChat, messages: []})
                 await getChatMessages(chatId)
                 setEmail("")
                 return
+
+                function findChat(chatId){
+                    const chatResult = chats.find(chat => chat._id == chatId)
+                    return chatResult ? chatResult : null
+                }
             }
 
             const users = [{_id: userResult.data._id}, {_id: connectedUserId}]
