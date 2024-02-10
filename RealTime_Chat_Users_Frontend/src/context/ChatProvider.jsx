@@ -120,7 +120,7 @@ const ChatProvider = ({children}) => {
         setChatsWithNewMessages((prevChatsWithNewMessages) => {
             const chatWithNewMessages = prevChatsWithNewMessages.filter((chat) => chat !== message.chatId);
 
-            if (message.sender == auth._id) {
+            if (message.sender == auth._id || chatOnPage._id === message.chatId) {
                 return [...chatWithNewMessages];
             } else {
                 return [...chatWithNewMessages, message.chatId];

@@ -11,7 +11,7 @@ import useAuth from "../hooks/useAuth";
 
 const StartChat = () => {
 
-    const { findUser, setChatOnPage, findChatId, getChatMessages, setChats, chats } = useChat();
+    const { findUser, setChatOnPage, findChatId, getChatMessages, setChats, chats, setSelectedChat } = useChat();
     const { auth } = useAuth();
 
     const [email, setEmail] = useState("");
