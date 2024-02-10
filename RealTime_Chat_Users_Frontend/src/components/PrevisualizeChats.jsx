@@ -24,7 +24,7 @@ const PrevisualizeChats = () => {
                 <div className="">
                     {
                         Object.keys(chats).length == 0 || chats.length == 0
-                        ? <div>Comience una nueva conversacion</div> 
+                        ? <div className="text-center" >Comience una nueva conversacion</div> 
                         : (
                             chats.map((chat) => {
                                 return chat.users.map( (user, index) => {

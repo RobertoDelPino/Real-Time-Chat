@@ -39,7 +39,7 @@ const ConfirmAccount = () => {
 
   return (
     <>
-      <h1 className="text-sky-600 font-black text-6xl capitalize">
+      <h1 className="text-sky-600 font-black text-6xl capitalize px-4 md:px-0">
         Confirma tu cuenta y comienza a {''} <span className="text-slate-700">chatear</span>
       </h1>
       <div className="mt-20 md:mt-10 shadow-lg px-5 py-10 rounded-xl bg-white">

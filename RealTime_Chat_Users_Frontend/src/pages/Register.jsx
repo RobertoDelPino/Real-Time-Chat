@@ -65,7 +65,7 @@ const Register = () => {
 
   return (
     <>
-      <section className="flex justify-center items-center gap-10 flex-wrap">
+      <section className="flex justify-center items-center gap-10 flex-wrap mt-10 px-4 md:px-0">
         <h1 className="text-sky-600 font-black text-6xl capitalize max-w-md">
           Crea tu cuenta y comienza a {''} <span className="text-slate-700">chatear</span>
         </h1>
