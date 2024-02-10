@@ -4,6 +4,8 @@ import io from "socket.io-client"
 import useAuth from "../hooks/useAuth";
 
 let socket;
+let openChatController;
+let sendMessageController;
 
 const ChatContext = createContext();
 
@@ -57,29 +59,43 @@ const ChatProvider = ({children}) => {
     }, [auth])
 
     const getChatMessages = async (chatId) => {
+        if (openChatController) {
+            openChatController.abort();
+        }
+
+        openChatController = new AbortController();
         const config = {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
-            }
+            },
+            signal: openChatController.signal
         }
         setIsGettingChatMessages(true)
-        const { data } = await axiosClient.get(`/chats/${chatId}`, config)
-        setChatOnPage(data)
-        setIsGettingChatMessages(false)
+        axiosClient.get(`/chats/${chatId}`, config)
+            .then(({data}) => {
+                setChatOnPage(data)
+                setIsGettingChatMessages(false)
+            })
     }
 
     const sendMessage =  async (message) => {
 
+        if (sendMessageController) {
+            sendMessageController.abort();
+        }
+
+        sendMessageController = new AbortController();
+
         const config = {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
-            }
+            },
+            signal: sendMessageController.signal
         }
 
         await axiosClient.post(`/messages/send`, message, config)
-
 
         socket.emit("Send Message", message)
     }
